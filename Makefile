@@ -7,6 +7,7 @@ default: seedlocation
 seedlocation: /dev/location
 	# seed a location to be spit out endlessly
 	echo 24.163419,-110.311692 | sudo tee -a $<
+	sudo chmod 644 $<
 umount:
 	sudo kill $$(pidof cusexmp)
 %: %.c
