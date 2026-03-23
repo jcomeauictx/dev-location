@@ -1,12 +1,14 @@
 # https://libfuse.github.io/doxygen/cuse_8c.html
-default: seedlocation
+# (obviously, use your own LOCATION)
+LOCATION ?= 24.163419,-110.311692
+default: umount seedlocation
 /dev/cusedebug: cusexmp | .installed/libfuse3-dev
 	sudo ./$< -d --name=$(@F)
 /dev/location: cusexmp | .installed/libfuse3-dev
 	sudo ./$< --name=$(@F)
 seedlocation: /dev/location
 	# seed a location to be spit out endlessly
-	echo 24.163419,-110.311692 | sudo tee -a $<
+	echo $(LOCATION) | sudo tee -a $<
 	sudo chmod 644 $<
 umount:
 	sudo kill $$(pidof cusexmp)
