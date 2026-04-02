@@ -19,3 +19,13 @@ umount:
 	touch $@
 .installed:
 	mkdir -p $@
+install: /etc/init.d/location
+/etc/init.d/location: location | /etc/init.d
+	sudo cp $< $@
+	-sudo rc-update del $< default
+	-sudo rc-update add $< default
+	sudo rc-service $< restart
+/etc/init.d:
+	@echo this is intended for Alpine/iSH installations >&2
+	false
+.PRECIOUS: /etc/init.d/location
