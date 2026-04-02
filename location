@@ -1,9 +1,12 @@
 #!/sbin/openrc-run
 # https://medium.com/@der.loste.kitkat/get-started-with-ish-b29add1f72a3
 description="Ensure iSH continues to run in the background"
-supervisor=supervise-daemon
+# don't uncomment the following, it will lock up iSH
+# then the only thing to do is, immediately on startup,
+# rc-update del location default
+#supervisor=supervise-daemon
 # 5 minute rest between crashes
-respawn_delay=300
+#respawn_delay=300
 command="/bin/bash"
 command_args="/root/.local/bin/location.sh"
 command_background=true
