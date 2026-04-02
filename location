@@ -2,7 +2,8 @@
 # https://medium.com/@der.loste.kitkat/get-started-with-ish-b29add1f72a3
 description="Ensure iSH continues to run in the background"
 supervisor=supervise-daemon
-respawn_delay=5
+# 5 minute rest between crashes
+respawn_delay=300
 command="/bin/bash"
 command_args="/root/.local/bin/location.sh"
 command_background=true
