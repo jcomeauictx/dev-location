@@ -11,7 +11,8 @@ LOGDIR=$LOGDIR/log/location
 if [ "$DEBUGGING" ]; then echo LOGDIR=$LOGDIR >&2; fi
 mkdir -p -m 0755 $LOGDIR
 lastseen=
-while read line; do
+exec 3</dev/location
+while read -u 3 line; do
  timestamp=$(date -u --iso-8601=ns)
  date=${timestamp%%T*}
  if [ "$DEBUGGING" ]; then echo $date $timestamp $line >&2; fi
@@ -20,4 +21,4 @@ while read line; do
   lastseen=$line
  fi
  sleep 15
-done < /dev/location
+done
