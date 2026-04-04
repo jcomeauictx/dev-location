@@ -2,6 +2,7 @@
 # (obviously, use your own LOCATION)
 LOCATION ?= 24.163419,-110.311692
 default: umount seedlocation
+%: %.sh  # empty rule to disable overwrite of `location` with `location.sh`
 /dev/cusedebug: cusexmp | .installed/libfuse3-dev
 	sudo ./$< -d --name=$(@F)
 /dev/location: cusexmp | .installed/libfuse3-dev
